@@ -1,6 +1,6 @@
 name: TLMinigame
 version: 1.0
-main: net.timelegacy.TLMin
+main: net.timelegacy.tlminigame.TLMinigame
 author: Nyarrth
-depend: [TLCore, TTA]
+depend: [TLCore]
 api-version: 1.13
