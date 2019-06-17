@@ -27,7 +27,7 @@ public class CountdownRunnable implements Runnable {
      */
     public CountdownRunnable start(int seconds) {
         this.secondsLeft = seconds;
-        this.taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(TLMinigame.getInstance(), this, 0L, 20L);
+        this.taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(TLMinigame.getPlugin(), this, 0L, 20L);
         this.countdown.onStart(seconds);
         return this;
     }

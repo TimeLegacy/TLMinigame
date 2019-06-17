@@ -21,7 +21,7 @@ public class Map {
     }
 
     public YamlConfiguration getMapConfig() {
-        File dataFile = new File(TLMinigame.getInstance().getDataFolder(), this.configName + ".yml");
+        File dataFile = new File(TLMinigame.getPlugin().getDataFolder(), this.configName + ".yml");
         return YamlConfiguration.loadConfiguration(dataFile);
     }
 
@@ -65,7 +65,7 @@ public class Map {
     }
 
     public static List<Location> spawns(String configName) {
-        File dataFile = new File(TLMinigame.getInstance().getDataFolder(), configName + ".yml");
+        File dataFile = new File(TLMinigame.getPlugin().getDataFolder(), configName + ".yml");
         YamlConfiguration config = null;
 
         if (!dataFile.exists()) {
