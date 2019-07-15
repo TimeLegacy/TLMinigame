@@ -1,5 +1,10 @@
 package net.timelegacy.tlminigame.match;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import net.timelegacy.tlcore.datatype.MinigameServer.State;
+import net.timelegacy.tlcore.utils.MessageUtils;
 import net.timelegacy.tlminigame.TLMinigame;
 import net.timelegacy.tlminigame.countdowns.CountdownHandler;
 import net.timelegacy.tlminigame.countdowns.RestartCountdown;
@@ -9,10 +14,6 @@ import net.timelegacy.tlminigame.map.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class GameHandler {
 
@@ -72,8 +73,7 @@ public class GameHandler {
 
         currentMap = m;
 
-
-        //game.core.serverHandler.setMap(game.core.serverHandler.getServerUID(), game.core.messageUtils.friendlyify(currentMap.getName()));
+        TLMinigame.minigameServer.setGame(MessageUtils.friendlyify(currentMap.getName()));
     }
 
     /**
@@ -108,6 +108,8 @@ public class GameHandler {
 
     public static void setState(GameState s) {
         state = s;
+
+        TLMinigame.minigameServer.setState(State.valueOf(s.toString()));
     }
 
     public static GameState getState() {
@@ -119,7 +121,7 @@ public class GameHandler {
 
     public static void setGameName(String name) {
         gameName = name;
-        //game.core.serverHandler.setGame(game.core.serverHandler.getServerUID(), name);
+        TLMinigame.minigameServer.setGame(name);
     }
 
     public static String getGameName() {

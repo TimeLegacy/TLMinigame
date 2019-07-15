@@ -1,5 +1,10 @@
 package net.timelegacy.tlminigame;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import net.timelegacy.tlcore.datatype.MinigameServer;
+import net.timelegacy.tlcore.handler.ServerHandler;
 import net.timelegacy.tlminigame.listeners.ConnectionListener;
 import net.timelegacy.tlminigame.listeners.LobbyListener;
 import net.timelegacy.tlminigame.playerstate.PlayersTeam;
@@ -8,16 +13,26 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 /**
  * @author MasterEjay & Nyarrth
  */
 public class TLMinigame extends JavaPlugin {
 
     private static TLMinigame plugin = null;
+
+  public static MinigameServer minigameServer;
+
+  public static void loadLobby() {
+    List<Location> loc = new ArrayList<Location>();
+    loc.add(new Location(Bukkit.getWorld("world"), 1402.5, 15, 21.5));
+
+    Random r = new Random();
+    int lr = r.nextInt(loc.size());
+
+    lobbyLocation = ((Location) loc.get(lr));
+  }
+
+  private static Location lobbyLocation;
 
     @SuppressWarnings("deprecation")
     @Override
@@ -29,32 +44,11 @@ public class TLMinigame extends JavaPlugin {
 
         loadLobby();
 
-        /*plugin.getServer().getScheduler().scheduleAsyncRepeatingTask(plugin, new Runnable() {
-            @Override
-            public void run() {
-                core.serverHandler.setState(core.serverHandler.getServerUID(),
-                        gameHandler.getState().toString());
-                core.serverHandler.setOnlinePlayers(core.serverHandler.getServerUID(),
-                        Bukkit.getOnlinePlayers().size());
-                core.serverHandler.setType(core.serverHandler.getServerUID(), "GAME");
-            }
-        }, 0, 20L * 1);*/
+      minigameServer = new MinigameServer(ServerHandler.getServerUUID());
 
         for(Player p : Bukkit.getOnlinePlayers()){
             PlayersTeam.addPlayer(p);
         }
-    }
-
-    private static Location lobbyLocation;
-
-    public static void loadLobby() {
-        List<Location> loc = new ArrayList<Location>();
-        loc.add(new Location(Bukkit.getWorld("world"), 258.5, 55, 1610.5));
-
-        Random r = new Random();
-        int lr = r.nextInt(loc.size());
-
-        lobbyLocation = ((Location) loc.get(lr));
     }
 
     public static Location getLobby() {
