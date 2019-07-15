@@ -15,7 +15,7 @@
 
   <distributionManagement>
     <snapshotRepository>
-      <id>snapshots</id>
+      <id>timelegacy-snapshots</id>
       <url>${env.NEXUS_REPO_URL}timelegacy-snapshots/</url>
     </snapshotRepository>
   </distributionManagement>
