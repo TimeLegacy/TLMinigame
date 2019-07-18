@@ -1,6 +1,7 @@
 package net.timelegacy.tlminigame.listener;
 
 import java.util.Random;
+import net.timelegacy.tlminigame.enums.GamePlayerType;
 import net.timelegacy.tlminigame.game.ArenaSettings;
 import net.timelegacy.tlminigame.game.Game;
 import net.timelegacy.tlminigame.game.GamePlayer;
@@ -76,6 +77,8 @@ public class SettingsListener implements Listener {
           }
         }
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -86,6 +89,8 @@ public class SettingsListener implements Listener {
       if (!settings.isAllowWeatherChange()) {
         e.setCancelled(true);
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -110,6 +115,8 @@ public class SettingsListener implements Listener {
           e.setCancelled(true);
         }
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -123,6 +130,8 @@ public class SettingsListener implements Listener {
           if (!ArenaManager.getActiveSettings(player).canEnderpearl()) {
             e.setCancelled(true);
           }
+        } else {
+          e.setCancelled(true);
         }
       }
     }
@@ -141,6 +150,8 @@ public class SettingsListener implements Listener {
         e.setCancelled(true);
       }
 
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -181,6 +192,8 @@ public class SettingsListener implements Listener {
           e.setCancelled(true);
         }
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -198,6 +211,8 @@ public class SettingsListener implements Listener {
           e.setCancelled(true);
         }
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -208,6 +223,8 @@ public class SettingsListener implements Listener {
       if (!settings.canItemDrop()) {
         e.setCancelled(true);
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -232,6 +249,8 @@ public class SettingsListener implements Listener {
           }
         }
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -245,6 +264,8 @@ public class SettingsListener implements Listener {
           e.setCancelled(true);
         }
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -262,6 +283,8 @@ public class SettingsListener implements Listener {
           e.setCancelled(true);
         }
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -272,6 +295,8 @@ public class SettingsListener implements Listener {
       if (!settings.canLeafDecay()) {
         e.setCancelled(true);
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -282,6 +307,8 @@ public class SettingsListener implements Listener {
       if (!settings.canLightning()) {
         e.setCancelled(true);
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -292,6 +319,8 @@ public class SettingsListener implements Listener {
       if (!settings.canMobSpawn() && e.getSpawnReason().equals(SpawnReason.NATURAL)) {
         e.setCancelled(true);
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -302,6 +331,8 @@ public class SettingsListener implements Listener {
       if (!settings.canPistons()) {
         e.setCancelled(true);
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -313,6 +344,8 @@ public class SettingsListener implements Listener {
       if (!settings.canPistons()) {
         e.setCancelled(true);
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -323,6 +356,8 @@ public class SettingsListener implements Listener {
       if (!settings.canPlayerSleep()) {
         e.setCancelled(true);
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -335,6 +370,8 @@ public class SettingsListener implements Listener {
           e.setCancelled(true);
         }
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -345,6 +382,8 @@ public class SettingsListener implements Listener {
       if (!settings.canVehicleDestroy()) {
         e.setCancelled(true);
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -356,6 +395,8 @@ public class SettingsListener implements Listener {
       if (!settings.isCanBuild()) {
         e.setCancelled(true);
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -370,6 +411,8 @@ public class SettingsListener implements Listener {
         e.getBlock().setType(Material.AIR);
       }
 
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -381,6 +424,8 @@ public class SettingsListener implements Listener {
       if (!settings.isAllowFoodLevelChange()) {
         e.setCancelled(true);
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -392,9 +437,6 @@ public class SettingsListener implements Listener {
       if (settings.isKeepInventory()) {
         e.setKeepInventory(true);
       }
-      if (player.getGame().getGameSettings().shouldDisableVanillaDeathMessages()) {
-        e.setDeathMessage("");
-      }
     }
   }
 
@@ -404,6 +446,8 @@ public class SettingsListener implements Listener {
     ArenaSettings settings = ArenaManager.getActiveSettings(player);
     if (settings != null) {
       e.setCancelled(!settings.isAllowDurabilityChange());
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -415,6 +459,8 @@ public class SettingsListener implements Listener {
       if (!settings.isAllowInventoryChange()) {
         e.setCancelled(true);
       }
+    } else {
+      e.setCancelled(true);
     }
   }
 
@@ -429,6 +475,10 @@ public class SettingsListener implements Listener {
           e.setRespawnLocation(
               (player.getTeam().getTeamSpawns().get(new Random().nextInt(player.getTeam().getTeamSpawns().size()))));
         }
+      }
+
+      if (player.getGame().getGamePlayerType(player) == GamePlayerType.SPECTATOR) {
+        e.setRespawnLocation(player.getGame().getArena().getSpectatorSpawn());
       }
 
       return;
@@ -458,6 +508,8 @@ public class SettingsListener implements Listener {
             }
           }
 
+        } else {
+          e.setCancelled(true);
         }
       }
 

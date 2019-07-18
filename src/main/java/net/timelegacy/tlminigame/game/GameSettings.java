@@ -10,7 +10,6 @@ public class GameSettings {
   private int minPlayers;
   private int maxPlayers;
   private int countdownTimer;
-  private boolean enableBungee;
   private Location lobbySpawn;
   private PlayerJoinLimitAction limitAction;
   private boolean shouldLeavePlayerOnDisconnect;
@@ -25,7 +24,6 @@ public class GameSettings {
   private int minTeamSize;
   private int maxTeamSize;
   private boolean autoTeamCompensation;
-  private boolean displayVanillaDeathMessages;
   private boolean resetWorlds;
 
   public GameSettings() {
@@ -52,8 +50,6 @@ public class GameSettings {
     this.minTeamSize = 1;
     this.maxTeamSize = 4;
     this.autoTeamCompensation = false;
-    this.enableBungee = false;
-    this.displayVanillaDeathMessages = true;
     this.resetWorlds = false;
   }
 
@@ -63,14 +59,6 @@ public class GameSettings {
 
   public void setResetWorlds(boolean reset) {
     this.resetWorlds = reset;
-  }
-
-  public boolean shouldDisableVanillaDeathMessages() {
-    return this.displayVanillaDeathMessages;
-  }
-
-  public void setDisableVanillaDeathMessages(boolean display) {
-    this.displayVanillaDeathMessages = display;
   }
 
   /**
@@ -228,24 +216,6 @@ public class GameSettings {
    */
   public void shouldLeavePlayerOnDisconnect(boolean should) {
     this.shouldLeavePlayerOnDisconnect = should;
-  }
-
-  /**
-   * Get whether or not the game uses Bungee servers.
-   *
-   * @return Bungee enabled
-   */
-  public boolean usesBungee() {
-    return this.enableBungee;
-  }
-
-  /**
-   * Set whether or not the game should use Bungee servers.
-   *
-   * @param bungee boolean.
-   */
-  public void setUsesBungee(boolean bungee) {
-    this.enableBungee = bungee;
   }
 
   public Location getLobbyLocation() {

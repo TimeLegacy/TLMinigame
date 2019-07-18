@@ -402,11 +402,7 @@ public class Game {
   public void removePlayer(GamePlayer player) {
     if (player.isOnline()) {
       this.players.remove(player);
-      if (this.getGameSettings().usesBungee()) {
-        player.getOnlinePlayer().kickPlayer("");
-      } else {
-        player.getOnlinePlayer().teleport(this.getGameSettings().getLobbyLocation());
-      }
+      player.getOnlinePlayer().kickPlayer("");
     }
     if (player.getTeam() != null && this.getGameSettings().shouldUseTeams()) {
       Team team = player.getTeam();
