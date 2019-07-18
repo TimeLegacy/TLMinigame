@@ -15,6 +15,7 @@ import net.timelegacy.tlminigame.enums.TeamSpreadType;
 import net.timelegacy.tlminigame.event.AutoTeamCompensationEvent;
 import net.timelegacy.tlminigame.event.GameEndEvent;
 import net.timelegacy.tlminigame.event.GameStartEvent;
+import net.timelegacy.tlminigame.event.GameStatusChangeEvent;
 import net.timelegacy.tlminigame.event.PlayerJoinGameEvent;
 import net.timelegacy.tlminigame.event.PlayerLeaveGameEvent;
 import net.timelegacy.tlminigame.manager.PlayerManager;
@@ -307,7 +308,6 @@ public class Game {
     for (GamePlayer pl : players) {
       this.removePlayer(pl);
     }
-    this.setGameStatus(GameStatus.WAITING);
     if (this.getGameSettings().shouldResetWorlds()) {
       final Game game = this;
       Bukkit.getScheduler().scheduleSyncDelayedTask(TLMinigame.getPlugin(), new Runnable() {
@@ -319,6 +319,8 @@ public class Game {
 
       }, 5L);
     }
+
+    this.setGameStatus(GameStatus.WAITING);
   }
 
   /**
@@ -529,6 +531,9 @@ public class Game {
    */
   public void setGameStatus(GameStatus status) {
     this.status = status;
+
+    GameStatusChangeEvent ev = new GameStatusChangeEvent(this);
+    Bukkit.getPluginManager().callEvent(ev);
   }
 
   /**
