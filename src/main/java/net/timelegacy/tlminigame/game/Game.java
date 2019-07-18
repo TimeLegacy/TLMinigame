@@ -15,7 +15,6 @@ import net.timelegacy.tlminigame.enums.TeamSpreadType;
 import net.timelegacy.tlminigame.event.AutoTeamCompensationEvent;
 import net.timelegacy.tlminigame.event.GameEndEvent;
 import net.timelegacy.tlminigame.event.GameStartEvent;
-import net.timelegacy.tlminigame.event.GameStatusChangeEvent;
 import net.timelegacy.tlminigame.event.PlayerJoinGameEvent;
 import net.timelegacy.tlminigame.event.PlayerLeaveGameEvent;
 import net.timelegacy.tlminigame.manager.PlayerManager;
@@ -531,9 +530,6 @@ public class Game {
    */
   public void setGameStatus(GameStatus status) {
     this.status = status;
-
-    GameStatusChangeEvent ev = new GameStatusChangeEvent(this);
-    Bukkit.getPluginManager().callEvent(ev);
   }
 
   /**
