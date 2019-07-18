@@ -106,7 +106,8 @@ public class Game {
 
               for (GamePlayer player : game.getPlayers()) {
                 player.getOnlinePlayer().sendTitle(MessageUtils.colorize("&aGame starts in"),
-                    MessageUtils.colorize("&2" + game.getGameSettings().getCountdownTime()), 20, 20, 20);
+                    MessageUtils.colorize("&2" + (
+                        game.getGameSettings().getCountdownTime() - game.getCurrentCountdown())), 20, 20, 20);
               }
             }
 
