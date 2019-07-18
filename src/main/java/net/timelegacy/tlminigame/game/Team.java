@@ -52,6 +52,10 @@ public class Team {
     this.teamSpawns.add(location);
   }
 
+  public void clearTeamSpawns() {
+    this.teamSpawns.clear();
+  }
+
   public Color getColor() {
     return this.color;
   }

@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 import net.md_5.bungee.api.ChatColor;
+import net.timelegacy.tlcore.datatype.MinigameServer;
+import net.timelegacy.tlcore.datatype.MinigameServer.State;
+import net.timelegacy.tlcore.handler.ServerHandler;
 import net.timelegacy.tlcore.utils.MessageUtils;
 import net.timelegacy.tlminigame.TLMinigame;
 import net.timelegacy.tlminigame.enums.GamePlayerType;
@@ -26,36 +29,22 @@ import org.bukkit.plugin.Plugin;
 public class Game {
 
   private String id;
-
   private HashMap<GamePlayer, GamePlayerType> playerModes = new HashMap<GamePlayer, GamePlayerType>();
-
   private GameStatus status;
-
   private Arena arena;
-
   private GameSettings settings;
-
   private TeamManager teamManager;
-
   private PlayerManager playerManager;
-
   private String messagePrefix;
-
   private Plugin plugin;
-
   private List<Area> areas;
-
   private List<GamePlayer> players;
-
   private HashMap<GamePlayer, Integer> kills = new HashMap<GamePlayer, Integer>();
-
   private List<Location> spawns;
-
   private boolean countingDown;
-
   private int currentCountdown;
-
   private Runnable loop;
+  private MinigameServer minigameServer;
 
   public Game(String id, Arena arena, GameStatus status, Plugin plugin) {
     this.id = id;
@@ -70,6 +59,12 @@ public class Game {
     this.settings = new GameSettings();
     this.currentCountdown = 0;
     this.spawns = new ArrayList<Location>();
+
+    this.minigameServer = new MinigameServer(ServerHandler.getServerUUID());
+
+    this.minigameServer.setGame(id.replace(" ", "").toUpperCase());
+    this.minigameServer.setMap(arena.getName());
+
     this.loop = new Runnable() {
 
       @Override
@@ -204,6 +199,14 @@ public class Game {
   public List<Location> getSpawns() {
     return this.spawns;
   }
+
+  /**
+   * Clear all normal spawns. These are only used when teams are disabled, for use in place of team spawns.
+   */
+  public void clearSpawns() {
+    this.spawns.clear();
+  }
+
 
   /**
    * Utility variable. Get the current countdown, can be used to start off the game when there are enough players.
@@ -530,6 +533,8 @@ public class Game {
    */
   public void setGameStatus(GameStatus status) {
     this.status = status;
+
+    this.minigameServer.setState(State.valueOf(status.toString()));
   }
 
   /**
