@@ -1,7 +1,6 @@
 package net.timelegacy.tlminigame.listener;
 
 import net.timelegacy.tlminigame.TLMinigame;
-import net.timelegacy.tlminigame.enums.GameStatus;
 import net.timelegacy.tlminigame.game.Game;
 import net.timelegacy.tlminigame.game.GamePlayer;
 import net.timelegacy.tlminigame.manager.GameManager;
@@ -22,11 +21,6 @@ public class PlayerJoinListener implements Listener {
         game.addPlayer(player);
 
         TLMinigame.sendDebugMessage("Adding player to " + game.getID(), TLMinigame.getPlugin());
-
-        if (game.getGameStatus() == GameStatus.INGAME) {
-          e.getPlayer().kickPlayer("This game is in progress.");
-        }
-
         break;
       }
     }
