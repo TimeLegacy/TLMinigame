@@ -98,11 +98,18 @@ public class Game {
               game.sendMessage(ChatColor.GREEN + "Game starts in " + ChatColor.DARK_GREEN + (
                   game.getGameSettings().getCountdownTime() - game.getCurrentCountdown()) + ChatColor.GREEN
                   + " seconds!");
+
             } else if (game.getGameSettings().getCountdownTime() - game.getCurrentCountdown() <= 5) {
               game.sendMessage(ChatColor.GREEN + "Game starts in " + ChatColor.DARK_GREEN + (
                   game.getGameSettings().getCountdownTime() - game.getCurrentCountdown()) + ChatColor.GREEN
                   + " seconds!");
+
+              for (GamePlayer player : game.getPlayers()) {
+                player.getOnlinePlayer().sendTitle(MessageUtils.colorize("&aGame starts in"),
+                    MessageUtils.colorize("&2" + game.getGameSettings().getCountdownTime()), 20, 20, 20);
+              }
             }
+
             game.increaseCountdown();
           } else {
             if (game.isMinimumPlayersFilled()) {
@@ -111,6 +118,12 @@ public class Game {
               game.setCountingDown(false);
             } else {
               game.sendMessage(ChatColor.RED + "Not enough players to start game.");
+
+              for (GamePlayer player : game.getPlayers()) {
+                player.getOnlinePlayer()
+                    .sendTitle(MessageUtils.colorize("&cNot enough players to start game."), "", 20, 20, 20);
+              }
+
               game.resetCurrentCountdown();
               game.setCountingDown(false);
             }
