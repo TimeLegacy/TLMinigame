@@ -36,7 +36,7 @@ public class Arena {
       Bukkit.createWorld(new WorldCreator(id));
     }
     this.world = Bukkit.getWorld(id);
-    this.saveDefault();
+    //this.saveDefault();
   }
 
   public String getName() {

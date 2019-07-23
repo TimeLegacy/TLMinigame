@@ -303,8 +303,6 @@ public class Game {
    */
   public void endGame() {
     this.setGameStatus(GameStatus.RESTARTING);
-    GameEndEvent ev = new GameEndEvent(this);
-    Bukkit.getPluginManager().callEvent(ev);
     List<GamePlayer> players = new CopyOnWriteArrayList<GamePlayer>(this.getPlayers());
     this.playerModes = new HashMap<GamePlayer, GamePlayerType>();
     for (GamePlayer pl : players) {
@@ -321,6 +319,9 @@ public class Game {
 
       }, 5L);
     }
+
+    GameEndEvent ev = new GameEndEvent(this);
+    Bukkit.getPluginManager().callEvent(ev);
 
     this.setGameStatus(GameStatus.WAITING);
   }
@@ -583,6 +584,16 @@ public class Game {
    */
   public Arena getArena() {
     return this.arena;
+  }
+
+  /**
+   * Set the global arena object for this game.
+   *
+   * @return Arena
+   */
+  public void setArena(Arena arena) {
+    this.minigameServer.setMap(arena.getName());
+    this.arena = arena;
   }
 
 }

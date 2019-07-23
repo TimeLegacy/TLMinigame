@@ -438,6 +438,8 @@ public class SettingsListener implements Listener {
         e.setKeepInventory(true);
       }
     }
+
+    e.setDeathMessage("");
   }
 
   @EventHandler(priority = EventPriority.LOWEST)
