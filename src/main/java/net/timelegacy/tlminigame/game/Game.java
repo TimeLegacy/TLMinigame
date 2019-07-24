@@ -23,7 +23,6 @@ import net.timelegacy.tlminigame.event.PlayerLeaveGameEvent;
 import net.timelegacy.tlminigame.manager.PlayerManager;
 import net.timelegacy.tlminigame.manager.TeamManager;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.plugin.Plugin;
 
 public class Game {
@@ -40,7 +39,6 @@ public class Game {
   private List<Area> areas;
   private List<GamePlayer> players;
   private HashMap<GamePlayer, Integer> kills = new HashMap<GamePlayer, Integer>();
-  private List<Location> spawns;
   private boolean countingDown;
   private int currentCountdown;
   private Runnable loop;
@@ -58,7 +56,6 @@ public class Game {
     this.players = new ArrayList<GamePlayer>();
     this.settings = new GameSettings();
     this.currentCountdown = 0;
-    this.spawns = new ArrayList<Location>();
 
     this.minigameServer = new MinigameServer(ServerHandler.getServerUUID());
 
@@ -187,28 +184,6 @@ public class Game {
 
 
   /**
-   * Add a game spawn. These are only used when teams are disabled, for use in place of team spawns.
-   */
-  public void addSpawn(Location location) {
-    this.spawns.add(location);
-  }
-
-  /**
-   * Get all game spawns. These are only used when teams are disabled, for use in place of team spawns.
-   */
-  public List<Location> getSpawns() {
-    return this.spawns;
-  }
-
-  /**
-   * Clear all normal spawns. These are only used when teams are disabled, for use in place of team spawns.
-   */
-  public void clearSpawns() {
-    this.spawns.clear();
-  }
-
-
-  /**
    * Utility variable. Get the current countdown, can be used to start off the game when there are enough players.
    * Starts at 0 and increases, subtract from GameSettings.getCountdownTime().
    *
@@ -288,9 +263,25 @@ public class Game {
           }
         }
       } else {
+        int count = 0;
         for (GamePlayer player : this.getPlayers()) {
           if (player.isOnline()) {
-            player.getOnlinePlayer().teleport(this.getSpawns().get(new Random().nextInt(this.getSpawns().size())));
+            if (getGameSettings().isRandomSpawns()) {
+              player
+                  .getOnlinePlayer()
+                  .teleport(
+                      this.arena.getSpawns().get(new Random().nextInt(this.arena.getSpawns().size())));
+            } else {
+              if (this.arena.getSpawns().size() >= this.getPlayers().size()) {
+                player.getOnlinePlayer().teleport(this.arena.getSpawns().get(count));
+                count++;
+              } else {
+                player
+                    .getOnlinePlayer()
+                    .teleport(
+                        this.arena.getSpawns().get(new Random().nextInt(this.arena.getSpawns().size())));
+              }
+            }
           }
         }
       }

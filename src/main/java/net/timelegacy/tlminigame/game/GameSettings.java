@@ -25,6 +25,7 @@ public class GameSettings {
   private int maxTeamSize;
   private boolean autoTeamCompensation;
   private boolean resetWorlds;
+  private boolean randomSpawns;
 
   public GameSettings() {
     loadDefaults();
@@ -51,6 +52,7 @@ public class GameSettings {
     this.maxTeamSize = 4;
     this.autoTeamCompensation = false;
     this.resetWorlds = false;
+    this.randomSpawns = false;
   }
 
   public boolean shouldResetWorlds() {
@@ -299,6 +301,14 @@ public class GameSettings {
 
   public void setHealthLevel(double healthLevel) {
     this.healthLevel = healthLevel;
+  }
+
+  public boolean isRandomSpawns() {
+    return this.randomSpawns;
+  }
+
+  public void setRandomSpawns(boolean toUse) {
+    this.randomSpawns = toUse;
   }
 
 }

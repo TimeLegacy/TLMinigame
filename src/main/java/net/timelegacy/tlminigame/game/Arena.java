@@ -2,6 +2,8 @@ package net.timelegacy.tlminigame.game;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import net.timelegacy.tlminigame.TLMinigame;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
@@ -14,14 +16,11 @@ import org.bukkit.entity.Player;
 public class Arena {
 
   private String id;
-
   private ArenaSettings settings;
-
   private Location spectatorSpawn;
-
   private Location lobbySpawn;
-
   private World world;
+  private List<Location> spawns;
 
   /**
    * Arena object, used in Game to define Arena world. If the world exists as a folder in the server directory but isn't
@@ -37,6 +36,21 @@ public class Arena {
     }
     this.world = Bukkit.getWorld(id);
     //this.saveDefault();
+    this.spawns = new ArrayList<Location>();
+  }
+
+  /**
+   * Add a game spawn. These are only used when teams are disabled, for use in place of team spawns.
+   */
+  public void addSpawn(Location location) {
+    this.spawns.add(location);
+  }
+
+  /**
+   * Get all game spawns. These are only used when teams are disabled, for use in place of team spawns.
+   */
+  public List<Location> getSpawns() {
+    return this.spawns;
   }
 
   public String getName() {
