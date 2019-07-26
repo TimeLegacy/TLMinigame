@@ -18,12 +18,8 @@ public class RestartCountdown extends Countdown {
 
   public void tick(int secs) {
     if ((secs % 5 == 0) || (secs < 5)) {
-      for (Player player : Bukkit.getOnlinePlayers()) {
-        MessageUtils.sendMessage(
-            player,
-            "&cRestarting server in &4&o" + secs + "&c " + (secs > 1 ? "seconds!" : "second!"),
-            true);
-      }
+      Bukkit.broadcastMessage(MessageUtils.colorize(
+          "&cRestarting server in &4&o" + secs + "&c " + (secs > 1 ? "seconds!" : "second!")));
     }
   }
 }
