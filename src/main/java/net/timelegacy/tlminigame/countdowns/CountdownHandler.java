@@ -53,4 +53,18 @@ public class CountdownHandler {
       }
     }
   }
+
+  /**
+   * Get seconds left in countdown
+   */
+
+  public static Integer getTime(Countdown countdown) {
+    for (CountdownRunnable runnable : runnables) {
+      if (runnable.getCountdown() == countdown) {
+        return runnable.getSecondsLeft();
+      }
+    }
+
+    return 0;
+  }
 }
