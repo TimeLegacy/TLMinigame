@@ -24,7 +24,8 @@ public class PlayerHandler {
       Bukkit.getServer().getPluginManager().callEvent(new GamePlayerAddEvent(new GamePlayer(uuid)));
     }
 
-    if (gamePlayers.size() >= GameHandler.getGame().getMinPlayers()) {
+    if (gamePlayers.size() >= GameHandler.getGame().getMinPlayers() && !(GameHandler.getGame().getState()
+        == GameState.STARTING)) {
       GameHandler.getGame().setState(GameState.STARTING);
       CountdownHandler.start(new StartCountdown(), 15);
     }
