@@ -1,6 +1,6 @@
 name: TLMinigame
-version: 0.1.0 Beta
-author: Nicholas Harris (ScarabCoder) & Nyarrth
-description: An API for developers to use when developing minigames.
-api-version: 1.13
+version: 1.0
 main: net.timelegacy.tlminigame.TLMinigame
+author: Nyarrth
+depend: [TLCore]
+api-version: 1.13

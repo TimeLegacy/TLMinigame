@@ -4,7 +4,6 @@ import net.timelegacy.tlminigame.TLMinigame;
 import org.bukkit.Bukkit;
 
 public class CountdownRunnable implements Runnable {
-
   Countdown countdown;
 
   int secondsLeft;
@@ -12,18 +11,23 @@ public class CountdownRunnable implements Runnable {
 
   /**
    * Constructor for countdown runnables, sets primary variables
+   *
+   * @param countdown
    */
   public CountdownRunnable(Countdown countdown) {
     this.countdown = countdown;
-
   }
 
   /**
    * Starts a countdown with the length of the seconds parameter
+   *
+   * @param seconds
+   * @return
    */
   public CountdownRunnable start(int seconds) {
     this.secondsLeft = seconds;
-    this.taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(TLMinigame.getPlugin(), this, 0L, 20L);
+    this.taskId =
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(TLMinigame.getPlugin(), this, 0L, 20L);
     this.countdown.onStart(seconds);
     return this;
   }
@@ -35,17 +39,13 @@ public class CountdownRunnable implements Runnable {
     Bukkit.getScheduler().cancelTask(taskId);
   }
 
-  /**
-   * Cancels the runnable
-   */
+  /** Cancels the runnable */
   public void cancel() {
     countdown.onCancel();
     stop();
   }
 
-  /**
-   * Main method, runs the actual timer and calls correct events based on the current time
-   */
+  /** Main method, runs the actual timer and calls correct events based on the current time */
   @Override
   public void run() {
     if (secondsLeft > 0) {
@@ -55,7 +55,6 @@ public class CountdownRunnable implements Runnable {
       countdown.onEnd();
       stop();
     }
-
   }
 
   public Countdown getCountdown() {

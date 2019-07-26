@@ -20,24 +20,6 @@
     </snapshotRepository>
   </distributionManagement>
 
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-shade-plugin</artifactId>
-        <executions>
-          <execution>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <phase>package</phase>
-          </execution>
-        </executions>
-        <groupId>org.apache.maven.plugins</groupId>
-        <version>3.2.0</version>
-      </plugin>
-    </plugins>
-  </build>
-
   <dependencies>
     <!-- SpigotAPI 1.13 -->
     <dependency>
@@ -52,11 +34,6 @@
       <artifactId>TLCore</artifactId>
       <version>1.0-SNAPSHOT</version>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <artifactId>commons-io</artifactId>
-      <groupId>commons-io</groupId>
-      <version>2.6</version>
     </dependency>
 
   </dependencies>
