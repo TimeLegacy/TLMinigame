@@ -169,5 +169,11 @@ public class Arena {
 
   }
 
+  public void clearSpawns() {
+    this.spawns.clear();
+    this.spectatorSpawn = null;
+    this.lobbySpawn = null;
+  }
+
 
 }

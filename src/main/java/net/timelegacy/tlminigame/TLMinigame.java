@@ -3,7 +3,6 @@ package net.timelegacy.tlminigame;
 import java.io.File;
 import net.timelegacy.tlminigame.listener.PlayerJoinListener;
 import net.timelegacy.tlminigame.listener.PlayerMovementListener;
-import net.timelegacy.tlminigame.listener.PlayerPvPListener;
 import net.timelegacy.tlminigame.listener.PlayerQuitListener;
 import net.timelegacy.tlminigame.listener.SettingsListener;
 import org.bukkit.Bukkit;
@@ -53,7 +52,6 @@ public class TLMinigame extends JavaPlugin {
 	public void onEnable() {
 		Bukkit.getPluginManager().registerEvents(new PlayerMovementListener(), this);
 		Bukkit.getPluginManager().registerEvents(new SettingsListener(), this);
-		Bukkit.getPluginManager().registerEvents(new PlayerPvPListener(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
 		getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");

@@ -2,6 +2,7 @@ package net.timelegacy.tlminigame.listener;
 
 import java.util.Random;
 import net.timelegacy.tlminigame.enums.GamePlayerType;
+import net.timelegacy.tlminigame.enums.GameStatus;
 import net.timelegacy.tlminigame.game.ArenaSettings;
 import net.timelegacy.tlminigame.game.Game;
 import net.timelegacy.tlminigame.game.GamePlayer;
@@ -420,9 +421,11 @@ public class SettingsListener implements Listener {
   public void onFoodchange(FoodLevelChangeEvent e) {
     GamePlayer player = PlayerManager.getGamePlayer((Player) e.getEntity());
     ArenaSettings settings = ArenaManager.getActiveSettings(player);
-    if (settings != null) {
-      if (!settings.isAllowFoodLevelChange()) {
-        e.setCancelled(true);
+    if (player.getGame().getGameStatus() == GameStatus.INGAME) {
+      if (settings != null) {
+        if (!settings.isAllowFoodLevelChange()) {
+          e.setCancelled(true);
+        }
       }
     } else {
       e.setCancelled(true);
